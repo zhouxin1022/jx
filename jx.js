@@ -17,6 +17,11 @@ var jx= {}
     }
 
   },
+  //获取ID
+  jx.getId = function(id){
+    return document.getElementById(id);
+  }
+  //
   //添加绑定事件
   jx.addEvent = function (target,type,callback){
             if(target.addEventListener){
@@ -27,7 +32,7 @@ var jx= {}
               // useCapture ：是否使用捕捉，一般用 false 。例如：document.getElementById("testText").addEventListener("keydown", function (event) { alert(event.keyCode); }, false);
               target.addEventListener(type,callback,false);
 
-            }else if(obj.attachEvent){
+            }else if(target.attachEvent){
               //target.attachEvent(type, listener);
               // target： 文档节点、document、window 或 XMLHttpRequest。
               // type： 字符串，事件名称，含“on”，比如“onclick”、“onmouseover”、“onkeydown”等。
@@ -79,25 +84,3 @@ var jx= {}
           return ele.currentStyle[prop];
       }
   }
-
-
-
-
-
-
-
-function a2(){
-  alert("2");
-}
-function a3(ev){
-  alert("3");
-  jx.preventDefault(ev);
-  jx.stopProragation();
-}
-jx.readyEvent(function(){
-  console.log("~~~~~~~~~~~~");
-  var block_dis = document.getElementById("block_dis");
-console.log(jx.getStyle(block_dis,"width"));
-  console.log("~~~~~~~~~~~~~~");
-
-});

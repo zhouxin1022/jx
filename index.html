@@ -1,13 +1,23 @@
 <!doctype html>
 <html>
-	<head>
-	<script type="text/javascript" src="jx.js"></script>
-	<link rel="stylesheet" type="text/css" href="index.css">
+<head>
+<meta charset="utf-8">
+<title>domo</title>
+<link type="text/css" rel="stylesheet" href="index.css"/>
+<script type="text/javascript" src="jx.js"></script>
 </head>
-	<body>
-		<div id="block_dis">
-			<a href="http://www.baidu.com">1111</a>
-		</div>
-	</body>
 
+<body>
+  <div id="domo">
+    <a href="http://www.baidu.com">1111</a>
+  </div>
+  <script>
+  jx.readyEvent(function(){
+    var domo = jx.getId("domo");
+    jx.addEvent(domo,"click",function(){
+      alert("1");
+    })
+  });
+  </script>
+</body>
 </html>
