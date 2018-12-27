@@ -1,9 +1,24 @@
 //js原生代码
+"use strict";//严格模式
+var jx= {}
+  //页面加载
+  jx.readyEvent = function(fn){
+    if(fn == null){
+      fn = document;
+    }
+    var oldonload = window.onload;
+    if(typeof window.onload != "function"){
+      window.onload = fn;
+    }else{
+      window.onload = function(){
+        oldonload();
+        fn();
+      }
+    }
 
-var jx= {
+  },
   //添加绑定事件
-
-  addEvent : function (target,type,callback){
+  jx.addEvent = function (target,type,callback){
             if(target.addEventListener){
               //target.addEventListener(type, listener, useCapture);
               //target： 文档节点、document、window 或 XMLHttpRequest。
@@ -23,7 +38,7 @@ var jx= {
             }
           },
   //删除绑定事件
-  removeEvent : function(target,type,callback){
+  jx.removeEvent = function(target,type,callback){
           //callback 方法/函数名称
             if(target.removeEventListener){
               target.removeEventListener(type,callback,false);
@@ -35,7 +50,7 @@ var jx= {
 
           },
    //阻止冒泡事件
-   stopProragation : function(){
+   jx.stopProragation = function(){
      if(event.stopProragation){
        event.stopProragation();
      }else{
@@ -44,7 +59,7 @@ var jx= {
    },
 
    //阻止元素的默认事件
-  preventDefault : function(ev){
+  jx.preventDefault = function(ev){
     if(ev && ev.preventDefault){
       ev.preventDefault();
     }else{
@@ -52,9 +67,20 @@ var jx= {
       return false;
     }
   },
+  //获取事件目标
+  jx.getTarget = function(event){
+    return event.target || event.srcElement;
+  }
+  //获取css样式
+  jx.getStyle = function(ele, prop){
+    if(window.getComputedStyle) {
+          return window.getComputedStyle(ele,null)[prop];
+      }else{
+          return ele.currentStyle[prop];
+      }
+  }
 
 
-}
 
 
 
@@ -62,20 +88,16 @@ var jx= {
 
 function a2(){
   alert("2");
-
-
 }
 function a3(ev){
   alert("3");
   jx.preventDefault(ev);
   jx.stopProragation();
 }
-jx.addEvent(window,"load",function(){
+jx.readyEvent(function(){
   console.log("~~~~~~~~~~~~");
   var block_dis = document.getElementById("block_dis");
-  var ba = block_dis.getElementsByTagName("a")[0];
-  jx.addEvent(block_dis,"click",a2);
-  jx.addEvent(ba,"click",a3);
+console.log(jx.getStyle(block_dis,"width"));
   console.log("~~~~~~~~~~~~~~");
 
 });
