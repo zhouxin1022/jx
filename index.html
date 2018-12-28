@@ -5,6 +5,7 @@
 <title>domo</title>
 <link type="text/css" rel="stylesheet" href="index.css"/>
 <script type="text/javascript" src="jx.js"></script>
+<script type="text/javascript" src="jBrowser.js"></script>
 </head>
 
 <body>
@@ -14,9 +15,12 @@
   <script>
   jx.readyEvent(function(){
     var domo = jx.getId("domo");
-    jx.addEvent(domo,"click",function(){
-      alert("1");
-    })
+    if(brow.isChrome) console.log("Chrome");
+    if(brow.isFirefox) console.log("isFirefox");
+    if(brow.isEdge) console.log("isEdge");
+    if(brow.isOpera) console.log("isOpera");
+    if(brow.isSafari) console.log("isSafari");
+    if(brow.isIE) console.log("isSafari");
   });
   </script>
 </body>
